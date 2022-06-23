@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, writeFile, readFileSync } from 'fs';
+import { existsSync, writeFile, readFileSync, appendFile } from 'fs';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 
@@ -10,7 +10,7 @@ async function askUsePath() {
     const answers = await inquirer.prompt({
         name: 'useDefault',
         type: 'list',
-        message: 'Use directory ' + chalk.blueBright(lastPath) + '?',
+        message: 'Use directory ' + chalk.cyanBright(lastPath) + '?',
         choices: [
             'Yes',
             'No',
@@ -40,7 +40,13 @@ async function pathExists(inputPath) {
         console.log('Directory ' + inputPath + chalk.green(' found!'));
         if (existsSync(inputPath + '/CompletelyRandomTrees.modinfo')) {
             console.log('CompletelyRandomTrees.modinfo ' + chalk.green(' found!'));
-            await seedingStart();
+            writeFile('directory.txt', userChosenPath, function(err)
+            {
+                if (err)
+                    return console.log(err);
+                console.log('Directory.txt updated with chosen path');
+                seedingStart();
+            });
         } else {
             console.log('CompletelyRandomTrees.modinfo ' + chalk.red(' not found!'));
             await exitProcess();
@@ -75,25 +81,87 @@ async function seedingStart() {
         message: 'What is the desired operation?',
         choices: [
             'Generate new seed',
-            'Import previous seed',
+            'Load previous seed',
             'Import custom seed',
         ],
     });
 
     if (answers.seedingChoice == 'Generate new seed') {
-        await writeRandomSeed();
+        await writeSeed((Math.random()*10000000).toPrecision(7), 'random');
+    } else if (answers.seedingChoice == 'Load previous seed') {
+        console.log('got to load previous seed');
+    } else if (answers.seedingChoice == 'Import custom seed') {
+        const subAnswers = await inquirer.prompt({
+            name: 'chosenSeed',
+            type: 'input',
+            message: 'Input seed:',
+        });
+        await writeSeed(subAnswers.chosenSeed, 'new');
     }
 }
 
-async function writeRandomSeed() {
-    let GeneratedSeed = (Math.random()*10000000).toPrecision(7);
-    writeFile('RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('CONFIG_TREES_RANDOM_SEED', " + GeneratedSeed + ");", function(err)
+async function writeSeed(inputSeed, seedType) {
+    writeFile('RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('CONFIG_TREES_RANDOM_SEED', " + inputSeed + ");", function(err)
     {
         if (err)
             return console.log(err);
-        console.log('Random seed ' + chalk.cyan(GeneratedSeed) + ' successfully wrote to RandomSeed.sql');
-        exitProcess();
+        if (seedType == 'random') {
+            console.log('Random seed ' + chalk.cyan(inputSeed) + ' successfully wrote to RandomSeed.sql');
+            newProfile(inputSeed);
+        } else {
+            console.log('Chosen seed ' + chalk.cyan(inputSeed) + ' successfully wrote to RandomSeed.sql');
+            if (seedType == 'new') {
+                newProfile(inputSeed);
+                return;
+            } else if (seedType == 'load') {
+                exitProcess();
+            }
+        }
     });
+}
+
+async function newProfile(inputSeed) {
+    const answers = await inquirer.prompt({
+        name: 'makeProfile',
+        type: 'list',
+        message: 'Make a new profile?',
+        choices: [
+            'Yes',
+            'No',
+        ],
+    });
+
+    if (answers.makeProfile == 'Yes') {
+        createProfile(inputSeed);
+    } else {
+        exitProcess();
+    }
+}
+
+async function createProfile(inputSeed) {
+    const answers = await inquirer.prompt({
+        name: 'profileName',
+        type: 'input',
+        message: 'Input a name:',
+    });
+
+    //Check if name consists of nothing or only white space
+    if (answers.profileName.trim().length === 0) {
+        console.log('Profile name cannot be nothing!');
+        redoProfile(inputSeed);
+    } else {
+        appendFile('profiles.txt', '\n' + answers.profileName + ': ' + inputSeed, function(err){
+            if (err)
+                return console.log(err);
+        });
+
+        console.log('New profile ' + chalk.cyan(answers.profileName) + ' created with seed ' + chalk.cyan(inputSeed) + '!');
+        await exitProcess();
+    }
+}
+
+function redoProfile(inputSeed) {
+    createProfile(inputSeed);
 }
 
 //Start process
