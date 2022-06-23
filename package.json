@@ -1,0 +1,27 @@
+{
+  "name": "cctcsmcc",
+  "bin": "index.js",
+  "version": "1.0.0",
+  "description": "companion for tech and civic shuffle mode config mod by WildW",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nexe"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wildweegee101/Configurable-Random-Trees.git"
+  },
+  "author": "WildW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wildweegee101/Configurable-Random-Trees/issues"
+  },
+  "homepage": "https://github.com/wildweegee101/Configurable-Random-Trees#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "fs": "0.0.1-security",
+    "node": "^18.4.0"
+  }
+}
