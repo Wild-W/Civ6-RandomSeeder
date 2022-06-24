@@ -43,9 +43,9 @@ async function askWhatPath() {
 
 async function pathExists(inputPath) {
     if (existsSync(inputPath)){
-        console.log('Directory ' + inputPath + chalk.green(' found!'));
+        console.log('Directory ' + inputPath + chalk.greenBright(' found!'));
         if (existsSync(inputPath + '/CompletelyRandomTrees.modinfo')) {
-            console.log('CompletelyRandomTrees.modinfo' + chalk.green(' found!'));
+            console.log('CompletelyRandomTrees.modinfo' + chalk.greenBright(' found!'));
             writeFile('directory.txt', userChosenPath, function(err)
             {
                 if (err)
@@ -112,7 +112,7 @@ async function seedingStart() {
         const subAnswers = await inquirer.prompt({
             name: 'modifyMod',
             type: 'list',
-            message: 'Write seed '  + chalk.cyan(generatedSeed) + ' to mod?' ,
+            message: 'Write seed '  + chalk.cyanBright(generatedSeed) + ' to mod?' ,
             choices: [
                 'Yes',
                 'No',
@@ -140,7 +140,7 @@ async function seedingStart() {
             seedingStart.call(this);
         }
     } else if (answers.seedingChoice == 'Choose another random solution') {
-        otherSolutions();
+        await otherSolutions();
     }
 }
 
@@ -148,20 +148,20 @@ async function otherSolutions() {
     const answers = await inquirer.prompt({
         name: 'chosenSolution',
         type: 'list',
-        name: 'Choose another random solution',
+        message: 'Choose another random solution',
         choices: [
             'New seed every day',
             'New seed every minute',
             'SQLite random function (does not work in multiplayer, new seed every reload)',
-        ]
+        ],
     });
 
     if (answers.chosenSolution == 'New seed every day') {
-
+        await writeSeed("STRFTIME('%Y%m%d')", 'day');
     } else if (answers.chosenSolution == 'New seed every minute') {
-
-    } else if (answers.chosenSolution == 'SQLite random function (does not work in multiplayer, new seed every reload)') {
-
+        await writeSeed("STRFTIME('%d%H%M')", 'minute');
+    } else if (answers.chosenSolution == 'SQLite random() function (does not work in multiplayer, new seed every reload)') {
+        await writeSeed('Abs(Random() % 10000000)', 'randomFunc');
     }
 }
 
@@ -171,15 +171,21 @@ async function writeSeed(inputSeed, seedType) {
         if (err)
             return console.log(err);
         if (seedType == 'random') {
-            console.log('Random seed ' + chalk.cyan(inputSeed) + ' successfully wrote to RandomSeed.sql');
+            console.log('Random seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             seedClipboard(inputSeed);
-        } else {
-            console.log('Chosen seed ' + chalk.cyan(inputSeed) + ' successfully wrote to RandomSeed.sql');
+        } else if (seedType == 'new' || seedType == 'load') {
+            console.log('Chosen seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             if (seedType == 'new') {
                 newProfile(inputSeed);
             } else if (seedType == 'load') {
                 exitProcess(); //do this
             }
+        } else if (seedType == 'day') {
+            console.log('Random by ' + chalk.cyanBright('day') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            exitProcess();
+        } else if (seedType == 'minute') {
+            console.log('Random by ' + chalk.cyanBright('minute') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            exitProcess();
         }
     });
 }
@@ -188,7 +194,7 @@ async function seedClipboard(inputSeed){
     const answers = await inquirer.prompt({
         name: 'copyToClipboard',
         type: 'list',
-        message: 'Copy seed ' + chalk.cyan(inputSeed) + ' to clipboard?',
+        message: 'Copy seed ' + chalk.cyanBright(inputSeed) + ' to clipboard?',
         choices: [
             'Yes',
             'No',
@@ -196,7 +202,7 @@ async function seedClipboard(inputSeed){
     });
 
     if (answers.copyToClipboard == 'Yes') {
-        console.log('Seed ' + chalk.cyan(inputSeed) + ' copied to clipboard!');
+        console.log('Seed ' + chalk.cyanBright(inputSeed) + ' copied to clipboard!');
         clipboard.writeSync(inputSeed.toString());
         newProfile(inputSeed);
     } else {
@@ -239,7 +245,7 @@ async function createProfile(inputSeed) {
                 return console.log(err);
         });
 
-        console.log('New profile ' + chalk.cyan(answers.profileName) + ' created with seed ' + chalk.cyan(inputSeed) + '!');
+        console.log('New profile ' + chalk.cyanBright(answers.profileName) + ' created with seed ' + chalk.cyanBright(inputSeed) + '!');
         await exitProcess();
     }
 }
