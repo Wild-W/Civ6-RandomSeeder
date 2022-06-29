@@ -134,7 +134,7 @@ async function seedingStart() {
         const subAnswers = await inquirer.prompt({
             name: 'profChoice',
             type: 'list',
-            message: 'Choose Profile',
+            message: 'Choose Profile:',
             choices: newProfilesArray
         });
 
@@ -179,7 +179,7 @@ async function otherSolutions() {
 }
 
 async function writeSeed(inputSeed, seedType) {
-    writeFile('RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('WW_RANDOM_SEED', " + inputSeed + ");", function(err)
+    writeFile(userChosenPath + '\\RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('WW_RANDOM_SEED', " + inputSeed + ");", function(err)
     {
         if (err)
             return console.log(err);

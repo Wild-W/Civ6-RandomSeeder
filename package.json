@@ -1,8 +1,8 @@
 {
-  "name": "cctcsmcc",
+  "name": "civ6-randomseeder",
   "bin": "index.js",
   "version": "1.0.0",
-  "description": "companion for tech and civic shuffle mode config mod by WildW",
+  "description": "Companion app for generating random seeds for civ 6 randomizer mods, made by WildW",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -24,7 +24,6 @@
     "clipboardy": "^3.0.0",
     "fs": "0.0.1-security",
     "inquirer": "^9.0.0",
-    "inquirer-chalk-pipe": "^1.3.0",
     "node": "^18.4.0"
   }
 }
