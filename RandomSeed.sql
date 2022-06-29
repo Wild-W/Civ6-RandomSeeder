@@ -1,1 +1,0 @@
-INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('WW_RANDOM_SEED', 7524479);
