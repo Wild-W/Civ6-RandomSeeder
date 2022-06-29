@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, writeFile, readFileSync, appendFile } from 'fs';
+import { existsSync, writeFile, readFileSync } from 'fs';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import clipboard from 'clipboardy';
@@ -101,7 +101,7 @@ async function seedingStart() {
         message: 'What is the desired operation?',
         choices: [
             'Generate new seed',
-            'Load previous seed',
+            'Load seed from existing profile',
             'Import custom seed',
             'Choose another random solution',
         ],
@@ -124,8 +124,21 @@ async function seedingStart() {
         } else {
             await seedClipboard(generatedSeed);
         }
-    } else if (answers.seedingChoice == 'Load previous seed') {
-        console.log('got to load previous seed');
+    } else if (answers.seedingChoice == 'Load seed from existing profile') {
+        let profilesArray = JSON.parse(readFileSync('profiles.json'));
+        var newProfilesArray = [];
+        for (var i = 0; i < profilesArray.length; i++) {
+            newProfilesArray.push(profilesArray[i].name + ' (' + profilesArray[i].seed + ')');
+        }
+
+        const subAnswers = await inquirer.prompt({
+            name: 'profChoice',
+            type: 'list',
+            message: 'Choose Profile',
+            choices: newProfilesArray
+        });
+
+        await writeSeed(profilesArray[newProfilesArray.indexOf(subAnswers.profChoice)].seed, 'load');
     } else if (answers.seedingChoice == 'Import custom seed') {
         const subAnswers = await inquirer.prompt({
             name: 'chosenSeed',
@@ -166,7 +179,7 @@ async function otherSolutions() {
 }
 
 async function writeSeed(inputSeed, seedType) {
-    writeFile('RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('CONFIG_TREES_RANDOM_SEED', " + inputSeed + ");", function(err)
+    writeFile('RandomSeed.sql', "INSERT OR IGNORE INTO GlobalParameters (Name, 'Value') VALUES ('WW_RANDOM_SEED', " + inputSeed + ");", function(err)
     {
         if (err)
             return console.log(err);
@@ -178,7 +191,7 @@ async function writeSeed(inputSeed, seedType) {
             if (seedType == 'new') {
                 newProfile(inputSeed);
             } else if (seedType == 'load') {
-                exitProcess(); //do this
+                exitProcess();
             }
         } else if (seedType == 'day') {
             console.log('Random by ' + chalk.cyanBright('day') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
@@ -240,7 +253,21 @@ async function createProfile(inputSeed) {
         console.log('Profile name cannot be nothing!');
         redoProfile(inputSeed);
     } else {
-        appendFile('profiles.txt', '\n' + answers.profileName + ': ' + inputSeed, function(err){
+        const filename = 'profiles.json';
+
+        let today = new Date();
+        let newProfileDefinition = {
+            name: answers.profileName,
+            seed: inputSeed,
+            date_saved: today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + ' ' + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+        };
+
+        var data = readFileSync(filename);
+        var myObject = JSON.parse(data);
+
+        myObject.push(newProfileDefinition);
+
+        writeFile(filename, JSON.stringify(myObject, null, 4), function(err){
             if (err)
                 return console.log(err);
         });
