@@ -34,31 +34,32 @@ async function askWhatPath() {
     const answers = await inquirer.prompt({
         name: 'chosenPath',
         type: 'input',
-        message: 'Input directory:'
+        message: 'Input directory:',
     });
 
-    userChosenPath = answers.chosenPath;
-    await pathExists(userChosenPath);
+    await pathExists(answers.chosenPath);
 }
 
 async function pathExists(inputPath) {
     if (existsSync(inputPath)){
-        console.log('Directory ' + inputPath + chalk.greenBright(' found!'));
-        if (existsSync(inputPath + '/CompletelyRandomTrees.modinfo')) {
-            console.log('CompletelyRandomTrees.modinfo' + chalk.greenBright(' found!'));
-            writeFile('directory.txt', userChosenPath, function(err)
+        console.log(chalk.greenBright('\u2713 ') + inputPath + chalk.greenBright(' found!'));
+        userChosenPath = inputPath;
+        if (existsSync(inputPath + '/RandomSeed.sql')) {
+            console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('RandomSeed.sql') + chalk.greenBright(' found!'));
+            writeFile('directory.txt', inputPath, function(err)
             {
                 if (err)
                     return console.log(err);
-                console.log('Directory.txt updated with chosen path');
+                if (lastPath != userChosenPath)
+                    console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('Directory.txt') + ' updated with chosen path!');
                 seedingStart();
             });
         } else {
-            console.log('CompletelyRandomTrees.modinfo ' + chalk.red(' not found!'));
+            console.log(chalk.redBright('\u26A0 ') + chalk.yellowBright('RandomSeed.sql') + chalk.redBright(' not found!'));
             await restartProcess();
         }
     } else {
-        console.log('Directory ' + inputPath + chalk.red(' not found!'));
+        console.log(chalk.redBright('\u26A0 ') + inputPath + chalk.redBright(' not found!'));
         await restartProcess();
     }
 }
@@ -149,7 +150,7 @@ async function seedingStart() {
         if (isNumber(subAnswers.chosenSeed)){
             await writeSeed(subAnswers.chosenSeed, 'new');
         } else {
-            console.log('Seed can only contain numbers!');
+            console.log(chalk.redBright('\u26A0') + ' Seed can only contain numbers!');
             seedingStart.call(this);
         }
     } else if (answers.seedingChoice == 'Choose another random solution') {
@@ -184,20 +185,20 @@ async function writeSeed(inputSeed, seedType) {
         if (err)
             return console.log(err);
         if (seedType == 'random') {
-            console.log('Random seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            console.log(chalk.greenBright('\u2713 ') + 'Random seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             seedClipboard(inputSeed);
         } else if (seedType == 'new' || seedType == 'load') {
-            console.log('Chosen seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            console.log(chalk.greenBright('\u2713 ') + 'Chosen seed ' + chalk.cyanBright(inputSeed) + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             if (seedType == 'new') {
                 newProfile(inputSeed);
             } else if (seedType == 'load') {
                 exitProcess();
             }
         } else if (seedType == 'day') {
-            console.log('Random by ' + chalk.cyanBright('day') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            console.log(chalk.greenBright('\u2713 ') + 'Random by ' + chalk.cyanBright('day') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             exitProcess();
         } else if (seedType == 'minute') {
-            console.log('Random by ' + chalk.cyanBright('minute') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
+            console.log(chalk.greenBright('\u2713 ') + 'Random by ' + chalk.cyanBright('minute') + ' successfully wrote to ' +  chalk.yellowBright('RandomSeed.sql') + '!');
             exitProcess();
         }
     });
@@ -215,7 +216,7 @@ async function seedClipboard(inputSeed){
     });
 
     if (answers.copyToClipboard == 'Yes') {
-        console.log('Seed ' + chalk.cyanBright(inputSeed) + ' copied to clipboard!');
+        console.log(chalk.greenBright('\u2713 ') + 'Seed ' + chalk.cyanBright(inputSeed) + ' copied to clipboard!');
         clipboard.writeSync(inputSeed.toString());
         newProfile(inputSeed);
     } else {
@@ -250,7 +251,7 @@ async function createProfile(inputSeed) {
 
     //Check if name consists of nothing or only white space
     if (answers.profileName.trim().length === 0) {
-        console.log('Profile name cannot be nothing!');
+        console.log(chalk.redBright('\u26A0 ') + 'Profile name cannot be nothing!');
         redoProfile(inputSeed);
     } else {
         const filename = 'profiles.json';
@@ -272,7 +273,7 @@ async function createProfile(inputSeed) {
                 return console.log(err);
         });
 
-        console.log('New profile ' + chalk.cyanBright(answers.profileName) + ' created with seed ' + chalk.cyanBright(inputSeed) + '!');
+        console.log(chalk.greenBright('\u2713 ') + 'New profile ' + chalk.cyanBright(answers.profileName) + ' created with seed ' + chalk.cyanBright(inputSeed) + '!');
         await exitProcess();
     }
 }
