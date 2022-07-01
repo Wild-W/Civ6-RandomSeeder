@@ -147,7 +147,11 @@ _Follow these steps to install the app through NPM:_
 _Steam users you can find their Civ 6 workshop mod directory by following these steps:_
 
 1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
+<img src="readme-images/local files.png" alt="localfiles">
+
 2. Navigate a couple levels back until you are in `steamapps`
+<img src="readme-images/browsing files.png" alt="browsingfiles">
+
 3. Now enter `workshop/content/289070`
     * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
 4. Find & Enter the folder in this directory with the same name as the target mod's ID
