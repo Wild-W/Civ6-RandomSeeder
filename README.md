@@ -151,8 +151,6 @@ _If you're having trouble, shoot me a message over [Discord](https://discordapp.
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-You are free to 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
