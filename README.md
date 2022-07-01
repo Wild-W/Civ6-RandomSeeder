@@ -105,6 +105,9 @@ _Follow these steps to install the app as an executable:_
 
 1. Extract Civ6-RandomSeeder.zip to its own folder somewhere
 2. Run Civ6-RandomSeeder.exe
+3. (Optional) Create a shortcut of the exe and place it in the directory `%programdata%\Microsoft\Windows\Start Menu\Programs`
+
+    * This will allow you to easily find the app using windows search box
 
 ### NPM Installation
 
@@ -125,6 +128,7 @@ _Follow these steps to install the app through NPM:_
    ```
    * If you skipped installing the package, npx will temporarily install it globally
 6. (Optional) Download this [batch file](other_files/start.bat) and place it in your directory
+
    * This file executes `npx civ6-randomizer` in the directory its placed in, think of it like a shortcut
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -150,20 +154,29 @@ _Steam users you can find their Civ 6 workshop mod directory by following these 
 
 1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
     ![](readme-images/local files.png)
+    
 2. Navigate a couple levels back until you are in `steamapps`
+
     ![](readme-images/browsefiles.png)
+    
 3. Now enter `workshop/content/289070`
+
     * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
+    
 4. Find & Enter the folder in this directory with the same name as the target mod's ID
+
     * You can find the ID of any workshop mod in the URL of their steam page
     ![](readme-images/id_finding.png)
     * My mod: Completely Configurable Tech & Civic Shuffle Mode has the ID: **2823800402**
+    
 5. Copy the mod's directory and paste it into the command-line prompt
+
     ![](readme-images/copyDir.png)
     * The next time you use the app, it will remember this directory
 
+* From here on, usage of the app should be simple & straightforward enough for anyone to use it
 
-_If you're having trouble, shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
+_If you're having trouble, you can always shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
