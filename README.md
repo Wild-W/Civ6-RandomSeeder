@@ -141,9 +141,10 @@ _Follow these steps to install the app through NPM:_
 * _Using the app is quite simple, but I've attached some useful information below if you need the extra help_
 
 #### Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
-* `directory.txt` stores the path to the mod (by default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
-* `profiles.json` stores user created "profiles" (a random seed with an accompanying title)
-* You don't need to edit these files directly, the app will take care of that
+![](readme-images/appDir.png)
+* You ***do not*** need to edit these files directly, the app will take care of that
+  * `directory.txt` stores the path to the mod (default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
+  * `profiles.json` stores user created "profiles" (a random seed with an accompanying title)
 * If for whatever reason, the app has trouble reading `profiles.json` and/or `directory.txt` and it cannot be resolved within the app itself, you may delete those files to let the app regenerate them
      * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
 
@@ -153,7 +154,8 @@ _Follow these steps to install the app through NPM:_
 _Steam users you can find their Civ 6 workshop mod directory by following these steps:_
 
 1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
-    ![](readme-images/local files.png)
+
+    ![](readme-images/local%20files.png)
     
 2. Navigate a couple levels back until you are in `steamapps`
 
