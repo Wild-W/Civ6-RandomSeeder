@@ -41,7 +41,7 @@
     <br />
     <details>
       <summary>View Demo</summary>
-      
+      <img src="readme-images/cliapp.gif" alt="gifshowcase"/>
     </details>
   </p>
 </div>
