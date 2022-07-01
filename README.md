@@ -124,6 +124,8 @@ _Follow these steps to install the app through NPM:_
    npx civ6-randomseeder
    ```
    * If you skipped installing the package, npx will temporarily install it globally
+6. (Optional) Download this [batch file](other_files/start.bat) and place it in your directory
+   * This file executes `npx civ6-randomizer` in the directory its placed in, think of it like a shortcut
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -132,15 +134,28 @@ _Follow these steps to install the app through NPM:_
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
+#### Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
 * `directory.txt` stores the path to the mod (by default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
 * `profiles.json` stores user created "profiles" (a random seed with an accompanying title)
 * You don't need to edit these files directly, the app will take care of that
-* If for whatever reason, the app has trouble reading `profiles.json` and/or `directory.txt` and it cannot be resolved within the app itself, you may delete the files to let the app regenerate them
+* If for whatever reason, the app has trouble reading `profiles.json` and/or `directory.txt` and it cannot be resolved within the app itself, you may delete those files to let the app regenerate them
      * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
 
+#### When prompted for a directory, know that the app is looking for _any_ valid directory that includes a file named `RandomSeed.sql`.
+* This file will be found in any compatible mod's directory.
 
-_If you're having trouble, shoot me a message over [Discord](https://discordapp.com/users/187983990181986304)_
+_Steam users you can find their Civ 6 workshop mod directory by following these steps:_
+
+1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
+2. Navigate a couple levels back until you are in `steamapps`
+3. Now enter `workshop/content/289070`
+    * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
+4. Find & Enter the folder in this directory with the same name as the target mod's ID
+    * You can find the ID of any workshop mod in the URL of their steam page
+    * My mod: Completely Configurable Tech & Civic Shuffle Mode has the ID: **2823800402**
+
+
+_If you're having trouble, shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -150,6 +165,8 @@ _If you're having trouble, shoot me a message over [Discord](https://discordapp.
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+I believe in collaboration, therefore this software is 100% free to use and repurpose, even in your own commercial projects. If you wish to, you can show some acknowlegment by forking this repo and/or crediting my name, but it is not required.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
