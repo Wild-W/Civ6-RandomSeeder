@@ -131,8 +131,10 @@ _Follow these steps to install the app through NPM:_
 
 
 
-<!-- USAGE EXAMPLES -->
+<!-- USAGE -->
 ## Usage
+
+* _Using the app is quite simple, but I've attached some useful information below if you need the extra help_
 
 #### Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
 * `directory.txt` stores the path to the mod (by default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
@@ -147,11 +149,9 @@ _Follow these steps to install the app through NPM:_
 _Steam users you can find their Civ 6 workshop mod directory by following these steps:_
 
 1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
-<img src="readme-images/local files.png" alt="localfiles">
-
+    ![](readme-images/local files.png)
 2. Navigate a couple levels back until you are in `steamapps`
-<img src="readme-images/browsefiles.png" alt="browsingfiles">
-
+    ![](readme-images/browsefiles.png)
 3. Now enter `workshop/content/289070`
     * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
 4. Find & Enter the folder in this directory with the same name as the target mod's ID
@@ -159,7 +159,8 @@ _Steam users you can find their Civ 6 workshop mod directory by following these 
     ![](readme-images/id_finding.png)
     * My mod: Completely Configurable Tech & Civic Shuffle Mode has the ID: **2823800402**
 5. Copy the mod's directory and paste it into the command-line prompt
-<img src="readme-images/copyDir.png" alt="copyDir">
+    ![](readme-images/copyDir.png)
+    * The next time you use the app, it will remember this directory
 
 
 _If you're having trouble, shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
