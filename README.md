@@ -156,7 +156,10 @@ _Steam users you can find their Civ 6 workshop mod directory by following these 
     * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
 4. Find & Enter the folder in this directory with the same name as the target mod's ID
     * You can find the ID of any workshop mod in the URL of their steam page
+    ![](readme-images/id_finding.png)
     * My mod: Completely Configurable Tech & Civic Shuffle Mode has the ID: **2823800402**
+5. Copy the mod's directory and paste it into the command-line prompt
+<img src="readme-images/copyDir.png" alt="copyDir">
 
 
 _If you're having trouble, shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
