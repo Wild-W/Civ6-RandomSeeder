@@ -150,7 +150,7 @@ _Steam users you can find their Civ 6 workshop mod directory by following these 
 <img src="readme-images/local files.png" alt="localfiles">
 
 2. Navigate a couple levels back until you are in `steamapps`
-<img src="readme-images/browsing files.png" alt="browsingfiles">
+<img src="readme-images/" alt="browsingfiles">
 
 3. Now enter `workshop/content/289070`
     * **289070** is the Steam game ID bestowed upon Civ 6, this folder is where all your workshop mods for Civ 6 are installed
