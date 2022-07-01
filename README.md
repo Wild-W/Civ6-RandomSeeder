@@ -124,10 +124,6 @@ _Follow these steps to install the app through NPM:_
    npx civ6-randomseeder
    ```
    * If you skipped installing the package, npx will temporarily install it globally
-   * Running civ6-randomseeder will automatically generate profiles.json and directory.txt in the folder if they do not already exist
-      * You don't need to edit these files directly, the app will take care of that
-   * If, for whatever reason the app has trouble reading profiles.json and/or directory.txt and it cannot be resolved within the app itself, you may delete the files to let the app regenerate them
-      * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -136,9 +132,15 @@ _Follow these steps to install the app through NPM:_
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
+* `directory.txt` stores the path to the mod (by default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
+* `profiles.json` stores user created "profiles" (a random seed with an accompanying title)
+* You don't need to edit these files directly, the app will take care of that
+* If for whatever reason, the app has trouble reading `profiles.json` and/or `directory.txt` and it cannot be resolved within the app itself, you may delete the files to let the app regenerate them
+     * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+
+_If you're having trouble, shoot me a message over [Discord](https://discordapp.com/users/187983990181986304)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -148,6 +150,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+You are free to 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
