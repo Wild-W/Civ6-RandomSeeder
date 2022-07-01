@@ -39,7 +39,10 @@
     <br />
     Originally made for my mod <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2823800402">Completely Configurable Tech & Civic Shuffle Mode</a> but can be easily retooled to work for another random mod
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <details>
+      <summary>View Demo</summary>
+      
+    </details>
   </p>
 </div>
 
@@ -50,13 +53,10 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about">About</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
@@ -68,26 +68,23 @@
 <!-- ABOUT -->
 ## About
 
-[![Product Name Screen Shot][product-screenshot]]
+<p align="center"><img src="readme-images/app.png" alt="app"></p>
 
-Civ 6 Random Seeder is an app I designed to make random mods in civ 6 a little less inconvenient. It was made with `node.js`, a JavaScript runtime environment.
+Civ 6 Random Seeder is an app I designed to make random mods in Civ 6 a little less inconvenient. It was made with `node.js`, a JavaScript runtime environment.
 
-\
+<ul>
 It accomplishes this by providing a streamlined way to automatically generate and store "random seeds", opposed to using your system's clock. (Such is a method with many of its own issues)
 
-There also exists a `Random()` function in SQLite which provides fantastic PRNG and can be used to order tables, but will re-roll whenever you reload the game and practically guarantees desync when used in multiplayer.
+\
+There also exists SQLite's `Random()` function which provides fantastic PRNG and can be used to order tables, but will re-roll whenever you reload the game and practically guarantees desync when used in multiplayer.
 
 \
 I do apologize for choosing Node, twas was a decision driven by familiarity. I forgot that to ship the app I'd need to package the entirety of Node and its modules into a single executable.
 
-This results in an uncompressed file size of around 120 MB, when realistically this app should only be a couple MB at most.
+This results in an uncompressed total size of around 120 MB, when realistically this app should be a couple MB at most.
+</ul>
 
-<img src="https://tsh.io/wp-content/uploads/fly-images/6691/node-modules-app-performance_-800x575.png" alt="node_heavy" width="400" height="287.5">
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+<p align="center"><img src="https://tsh.io/wp-content/uploads/fly-images/6691/node-modules-app-performance_-800x575.png" alt="node_heavy" width="600" height="383.3"></p>
 
 
 
@@ -98,13 +95,20 @@ Here's why:
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To install this app, either download the most recently published release that's compatible with your operating system, or install it through npm.
-<br />
-If you are not familar with npm I would recommend downloading from releases, it's much less hassle.
+To install this app, either download the most recently published release that's compatible with your operating system, or install it through NPM.
+
+_If you are not familar with NPM I would recommend downloading the app <a href="https://github.com/wildweegee101/Civ6-RandomSeeder/releases">here</a>, it's much less hassle._
+
+### Direct Installation
+
+_Follow these steps to install the app as an executable:_
+
+1. Extract Civ6-RandomSeeder.zip to its own folder somewhere
+2. Run Civ6-RandomSeeder.exe
 
 ### NPM Installation
 
-_Follow these steps to install the app through npm:_
+_Follow these steps to install the app through NPM:_
 
 1. [Install NPM & node.js](https://phoenixnap.com/kb/install-node-js-npm-on-windows) if you haven't already
 2. Create a new folder where you wish to store the app
@@ -121,7 +125,7 @@ _Follow these steps to install the app through npm:_
    ```
    * If you skipped installing the package, npx will temporarily install it globally
    * Running civ6-randomseeder will automatically generate profiles.json and directory.txt in the folder if they do not already exist
-   * You don't need to edit these files directly, the app will take care of that
+      * You don't need to edit these files directly, the app will take care of that
    * If, for whatever reason the app has trouble reading profiles.json and/or directory.txt and it cannot be resolved within the app itself, you may delete the files to let the app regenerate them
       * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
 
@@ -155,4 +159,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [issues-url]: https://github.com/wildweegee101/Civ6-RandomSeeder/issues
 [license-shield]: https://img.shields.io/github/license/wildweegee101/Civ6-RandomSeeder.svg?style=for-the-badge
 [license-url]: https://github.com/wildweegee101/Civ6-RandomSeeder/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
