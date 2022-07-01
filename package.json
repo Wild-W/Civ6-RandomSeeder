@@ -1,7 +1,7 @@
 {
   "name": "civ6-randomseeder",
   "bin": "index.js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Companion app for generating random seeds for civ 6 randomizer mods, made by WildW",
   "main": "index.js",
   "type": "module",

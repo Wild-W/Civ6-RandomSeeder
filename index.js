@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, writeFile, readFileSync } from 'fs';
+import { existsSync, writeFile, readFileSync, open } from 'fs';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import clipboard from 'clipboardy';
@@ -9,8 +9,41 @@ function isNumber(val) {
     return /^\d+$/.test(val);
 }
 
-let lastPath = readFileSync('directory.txt', 'utf8');
+var lastPath = 'C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\289070\\2823800402';
 let userChosenPath = lastPath;
+
+async function directoryTxtExist() {
+    open('directory.txt', 'r', function(fileNotExists, file) {
+        if (fileNotExists) {
+            writeFile('directory.txt', 'C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\289070\\2823800402', (err) => {
+                if (err)
+                    console.error(err);
+                console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('directory.txt') + ' generated with default mod directory!');
+                profilesJsonExist();
+            });
+        } else {
+            console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('directory.txt') + chalk.greenBright(' found') + '!');
+            lastPath = readFileSync('directory.txt', 'utf8');
+            profilesJsonExist();
+        }
+    });
+}
+
+async function profilesJsonExist() {
+    open('profiles.json', 'r', function(fileNotExists, file) {
+        if (fileNotExists) {
+            writeFile('profiles.json', '[ ]', (err) => {
+                if (err)
+                    console.error(err);
+                console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('profiles.json') + ' generated. Create new profiles to load from it!');
+                askUsePath();
+            });
+        } else {
+            console.log(chalk.greenBright('\u2713 ') + chalk.yellowBright('profiles.json') + chalk.greenBright(' found') + '!');
+            askUsePath();
+        }
+    });
+}
 
 async function askUsePath() {
     const answers = await inquirer.prompt({
@@ -105,6 +138,7 @@ async function seedingStart() {
             'Load seed from existing profile',
             'Import custom seed',
             'Choose another random solution',
+            'Delete existing profile',
         ],
     });
 
@@ -127,6 +161,13 @@ async function seedingStart() {
         }
     } else if (answers.seedingChoice == 'Load seed from existing profile') {
         let profilesArray = JSON.parse(readFileSync('profiles.json'));
+
+        if (profilesArray.length <= 0) {
+            console.log(chalk.redBright('\u26A0') + ' No profiles exist, one must be made before it can be loaded!');
+            await restartProcess();
+            return;
+        }
+
         var newProfilesArray = [];
         for (var i = 0; i < profilesArray.length; i++) {
             newProfilesArray.push(profilesArray[i].name + ' (' + profilesArray[i].seed + ')');
@@ -155,7 +196,44 @@ async function seedingStart() {
         }
     } else if (answers.seedingChoice == 'Choose another random solution') {
         await otherSolutions();
+    } else if (answers.seedingChoice == 'Delete existing profile') {
+        let profilesArray = JSON.parse(readFileSync('profiles.json'));
+
+        if (profilesArray.length <= 0) {
+            console.log(chalk.redBright('\u26A0') + ' No profiles exist, one must be made before it can be deleted!');
+            await restartProcess();
+            return;
+        }
+
+        var newProfilesArray = [];
+        for (var i = 0; i < profilesArray.length; i++) {
+            newProfilesArray.push(profilesArray[i].name + ' (' + profilesArray[i].seed + ')');
+        }
+
+        const subAnswers = await inquirer.prompt({
+            name: 'profChoice',
+            type: 'list',
+            message: 'Choose profile to delete:',
+            choices: newProfilesArray
+        });
+
+        await deleteProfiles(newProfilesArray.indexOf(subAnswers.profChoice), profilesArray);
     }
+}
+
+async function deleteProfiles(index, profArray) {
+    let seedVal = profArray[index].seed;
+    let nameVal = profArray[index].name;
+
+    profArray.splice(index, 1);
+
+    writeFile('profiles.json', JSON.stringify(profArray, null, 4), function(err){
+        if (err)
+            return console.log(err);
+    });
+
+    console.log(chalk.greenBright('\u2713 ') + 'Deleted profile ' + chalk.cyanBright(nameVal) + '! (' + chalk.cyanBright(seedVal) + ')');
+    await exitProcess();
 }
 
 async function otherSolutions() {
@@ -283,4 +361,4 @@ function redoProfile(inputSeed) {
 }
 
 //Start process
-askUsePath();
+directoryTxtExist();
