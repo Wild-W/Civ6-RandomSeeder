@@ -155,7 +155,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[issues-shield]: https://img.shields.io/github/issues/wildweegee101/Civ6-RandomSeeder.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/wildweegee101/civ6-randomseeder
 [issues-url]: https://github.com/wildweegee101/Civ6-RandomSeeder/issues
-[license-shield]: https://img.shields.io/github/license/wildweegee101/Civ6-RandomSeeder.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/wildweegee101/civ6-randomseeder
 [license-url]: https://github.com/wildweegee101/Civ6-RandomSeeder/blob/master/LICENSE.txt
