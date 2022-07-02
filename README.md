@@ -52,13 +52,11 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about">About</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#how-to-build">How To Build</a></li>
+    <li><a href="#compatibility">Compatibility</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -107,7 +105,7 @@ _Follow these steps to install the app as an executable:_
 2. Run Civ6-RandomSeeder.exe
 3. (Optional) Create a shortcut of the exe and place it in the directory `%programdata%\Microsoft\Windows\Start Menu\Programs`
 
-    * This will allow you to easily find the app using windows search box
+    * This will allow you to easily find the app using the windows search box
 
 ### NPM Installation
 
@@ -130,6 +128,10 @@ _Follow these steps to install the app through NPM:_
 6. (Optional) Download this [batch file](other_files/start.bat) and place it in your directory
 
    * This file executes `npx civ6-randomizer` in the directory its placed in, think of it like a shortcut
+   
+    6a. (Optional) Create a shortcut to this batch file and place it in the directory `%programdata%\Microsoft\Windows\Start Menu\Programs`
+
+      * This will allow you to easily find the app using the windows search box
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -140,7 +142,7 @@ _Follow these steps to install the app through NPM:_
 
 * _Using the app is quite simple, but I've attached some useful information below if you need the extra help_
 
-#### Running this app will automatically generate two files in the immediate directory: `directory.txt` and `profiles.json`
+#### If they do not already exist, running this app will generate two files in the immediate directory: `directory.txt` and `profiles.json`
 ![](readme-images/appDir.png)
 * You ***do not*** need to edit these files directly, the app will take care of that
   * `directory.txt` stores the path to the mod (default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
@@ -151,7 +153,7 @@ _Follow these steps to install the app through NPM:_
 #### When prompted for a directory, know that the app is looking for _any_ valid directory that includes a file named `RandomSeed.sql`.
 * This file will be found in any compatible mod's directory.
 
-_Steam users you can find their Civ 6 workshop mod directory by following these steps:_
+_Steam users can find their Civ 6 workshop mod directory by following these steps:_
 
 1. In your library, right click on Sid Meier's Civilization VI and navigate to `Manage -> Browse local files`
 
@@ -181,6 +183,59 @@ _Steam users you can find their Civ 6 workshop mod directory by following these 
 _If you're having trouble, you can always shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- HOW TO BUILD -->
+## How To Build
+
+_I know this software is safe, but if you do not trust me, or for whatever other reason would like to build the app yourself, follow these steps:_
+
+1. [Install NPM & node.js](https://phoenixnap.com/kb/install-node-js-npm-on-windows) if you haven't already
+2. Download and decompress this project's source code
+
+    **OR**
+    
+   Clone this repo using [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+     ```sh
+     git clone https://github.com/wildweegee101/Civ6-RandomSeeder
+     ```
+3. Install `node_modules` in the local project directory
+    ```sh
+    npm install
+    ```
+4. Run the project
+    ```sh
+    node .
+    ```
+5. (Optional) Build the project to an executable using `nexe`
+    ```sh
+    npm install nexe -g
+    ```
+    ```sh
+    nexe --build
+    ```
+    
+    * You can add a custom icon to an exe using [Resource Hacker](http://www.angusj.com/resourcehacker/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- Compatibility -->
+## Compatibility
+
+_For now, and perhaps forever, there is only one compatible mod, but if you wish to make your own randomizer mod then you are 100% free to integrate it with this app, and I'd be willing to help_
+
+* In that case, a couple things should probably be addressed first
+    1. The app is currently hard-coded to write a random seed to the `GlobalParameters` table where `name` = `WW_RANDOM_SEED`
+        * **WW** is the prefix I give my database entries, because having multiple entries with the same `name` violates `GlobalParameter`'s unique constraint
+        * Basically this means that you wouldn't be able to use two mods both using this app for random seeds in the same game
+        * Fortunately this should be a very easy fix
+    2. As a QOL change, `directories.txt` should perhaps be upgraded to a json file capable of storing an array of mods and their file paths
+    
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 
 <!-- LICENSE -->
