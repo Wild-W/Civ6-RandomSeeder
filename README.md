@@ -249,7 +249,7 @@ _For now, and perhaps forever, there is only one compatible mod, but if you wish
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-I believe in collaboration, therefore this software is 100% free to use and repurpose, even in your own commercial projects. If you wish to, you can show some acknowlegment by forking this repo and/or crediting my name, but it is not required.
+This software is 100% free to use and repurpose, even in your own commercial projects. If you wish to, you can show some acknowlegment by forking this repo and/or crediting my name, but it is not required.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
