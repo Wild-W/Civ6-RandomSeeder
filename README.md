@@ -178,6 +178,7 @@ _Steam users can find their Civ 6 workshop mod directory by following these step
     ![](readme-images/copyDir.png)
     * The next time you use the app, it will remember this directory
 
+* _When using this app for multiplayer games, use the "copy seed" prompt to paste & distribute it to all the players, everyone needs to be using the same seed to avoid desync_
 * From here on, usage of the app should be simple & straightforward enough for anyone to use it
 
 _If you're having trouble, you can always shoot me a message over on [Discord](https://discordapp.com/users/187983990181986304)_
