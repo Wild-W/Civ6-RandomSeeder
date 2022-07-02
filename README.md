@@ -131,7 +131,7 @@ _Follow these steps to install the app through NPM:_
    
     6a. (Optional) Create a shortcut to this batch file and place it in the directory `%programdata%\Microsoft\Windows\Start Menu\Programs`
 
-      * This will allow you to easily find the app using the windows search box
+   * This will allow you to easily find the app using the windows search box
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -140,7 +140,7 @@ _Follow these steps to install the app through NPM:_
 <!-- USAGE -->
 ## Usage
 
-* _Using the app is quite simple, but I've attached some useful information below if you need the extra help_
+* _Using the app is generally quite simple, but I've attached some useful information below if you need the help_
 
 #### If they do not already exist, running this app will generate two files in the immediate directory: `directory.txt` and `profiles.json`
 ![](readme-images/appDir.png)
@@ -148,10 +148,10 @@ _Follow these steps to install the app through NPM:_
   * `directory.txt` stores the path to the mod (default: C:\Program Files (x86)\Steam\steamapps\workshop\content\289070\2823800402)
   * `profiles.json` stores user created "profiles" (a random seed with an accompanying title)
 * If for whatever reason, the app has trouble reading `profiles.json` and/or `directory.txt` and it cannot be resolved within the app itself, you may delete those files to let the app regenerate them
-     * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening the file to retrieve any important data before deletion
+     * This will result in the loss of whatever data they stored, if this is an issue I would recommend opening them to retrieve any important data before deletion
 
 #### When prompted for a directory, know that the app is looking for _any_ valid directory that includes a file named `RandomSeed.sql`.
-* This file will be found in any compatible mod's directory.
+* This file will be found in any [compatible mod](#compatibility)'s directory.
 
 _Steam users can find their Civ 6 workshop mod directory by following these steps:_
 
@@ -233,6 +233,12 @@ _For now, and perhaps forever, there is only one compatible mod, but if you wish
         * Basically this means that you wouldn't be able to use two mods both using this app for random seeds in the same game
         * Fortunately this should be a very easy fix
     2. As a QOL change, `directories.txt` should perhaps be upgraded to a json file capable of storing an array of mods and their file paths
+    
+### Compatible Mods
+
+* [Completely Configurable Tech & Civic Shuffle Mode](https://steamcommunity.com/sharedfiles/filedetails/?id=2823800402)
+
+
     
 <p align="right">(<a href="#top">back to top</a>)</p>
 
